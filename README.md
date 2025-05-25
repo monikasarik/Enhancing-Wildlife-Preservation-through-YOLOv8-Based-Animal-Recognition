@@ -3,7 +3,7 @@
 <h3 align="center">Real-Time Wildlife Detection using YOLOv8 + Flask Web App</h3>
 
 <p align="center">
-  <img src="screenshots/WhatsApp Image 2025-05-25 at 10.22.20 AM.jpeg" alt="Wildlife Detection Screenshot" width="600"/>
+  <img src="screenshots/WhatsApp Image 2025-05-25 at 10.22.21 AM (1).jpeg" alt="Wildlife Detection Screenshot" width="600"/>
 </p>
 
 ---
@@ -35,9 +35,8 @@ This project aims to support wildlife preservation by building a real-time objec
 - 📱 Clean, responsive web design with **interactive feedback**
 
 ---
-
 <p align="center">
-  <img src="https://github.com/your-username/your-repo-name/blob/main/Screenshots/user-dashboard.png" alt="Dashboard Screenshot" width="600"/>
+  <img src="screenshots/WhatsApp Image 2025-05-25 at 10.22.20 AM.jpeg" alt="Dashboard Screenshot" width="600"/>
 </p>
 
 ---
@@ -54,3 +53,48 @@ This project aims to support wildlife preservation by building a real-time objec
 
 ### 📂 Project Structure
 
+├── app.py # Flask backend
+├── templates/ # HTML templates (index, dashboard)
+├── static/ # CSS, JS, and uploaded images
+├── screenshots/ # Demo screenshots for documentation
+├── database.sql # SQL for MySQL schema
+├── requirements.txt # Python dependencies
+└── README.md # Project description
+
+
+---
+
+### 🖥️ Languages and Tools Used
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Flask-000000?style=flat&logo=flask&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MySQL-005C84?style=flat&logo=mysql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/YOLOv8-FFCA28?style=flat&logo=ultralytics&logoColor=black"/>
+</p>
+
+---
+
+### 🧩 Project Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/wildlife-detection-app.git
+
+# Create virtual environment & activate
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the app
+python app.py
+
+📌 Future Scope
+📹 Live camera feed & drone integration
+📱 Mobile application version
+🧠 Animal behavior prediction with time-series data
+🌍 Integration with forest department IoT alert systems
