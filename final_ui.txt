@@ -1,0 +1,161 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Detection AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🐾 Animal Detection AI</h1>
+        <p>Upload an image and let AI detect the animals in it.</p>
+
+        <label for="imageInput" class="custom-file-upload">📷 Choose an Image</label>
+        <input type="file" id="imageInput" accept="image/*">
+        
+        <button id="detectButton">🔍 Detect Animals</button>
+
+        <div id="result"></div>
+        <img id="outputImage" class="hidden">
+
+        <footer>
+            <p>Powered by <strong>YOLOv8 AI</strong> | Designed for Wildlife Conservation</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        document.getElementById("detectButton").addEventListener("click", uploadImage);
+    </script>
+</body>
+</html>
+
+
+style.css
+
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    max-width: 500px;
+    background: white;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Title */
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* File Upload Button */
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4facfe;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* Detect Button */
+button {
+    background-color: #00f2fe;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #4facfe;
+}
+
+/* Detected Image */
+#outputImage {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hidden Class */
+.hidden {
+    display: none;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+
+script.js
+
+function uploadImage() {
+    let input = document.getElementById("imageInput");
+    if (input.files.length === 0) {
+        alert("Please select an image first.");
+        return;
+    }
+
+    let file = input.files[0];
+    let formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/predict", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        let resultDiv = document.getElementById("result");
+        let img = document.getElementById("outputImage");
+
+        if (data.animals.length > 0) {
+            resultDiv.innerHTML = "<h3>Detected Animals:</h3>";
+            data.animals.forEach(animal => {
+                resultDiv.innerHTML += `<p>${animal.name} - Confidence: ${(animal.confidence * 100).toFixed(2)}%</p>`;
+            });
+
+            let timestamp = new Date().getTime();  // Generate a unique timestamp
+            img.src = data.image_url + "?t=" + timestamp;  // Append timestamp to force reload
+                 // Show processed image
+            img.style.display = "block";
+        } else {
+            resultDiv.innerHTML = "<p>No animals detected.</p>";
+            img.style.display = "none";
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Something went wrong. Check console for details.");
+    });
+}
+
+
+

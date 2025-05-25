@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Detection AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-title">🌿 Wildlife Detection</div>
+        <div class="user-menu">
+            <button class="user-icon" onclick="toggleDropdown()">👤</button>
+            <div class="dropdown hidden" id="dropdownMenu">
+                <a href="#" onclick="showLoginForm()">Login</a>
+                <a href="#" onclick="showSignupForm()">Signup</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="popup-form hidden">
+        <h3>Login</h3>
+        <input type="text" placeholder="Username" id="loginUsername"/><br/>
+        <input type="password" placeholder="Password" id="loginPassword"/><br/>
+        <button onclick="submitLogin()">Login</button>
+        <button class="cancel-btn" onclick="closeForms()">Cancel</button>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="signupForm" class="popup-form hidden">
+        <h3>Signup</h3>
+        <input type="text" id="signupUsername" placeholder="Username" required>
+        <input type="email" id="signupEmail" placeholder="Email" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+        <button onclick="submitSignup()">Signup</button>
+        <button class="cancel-btn" onclick="closeForms()">Cancel</button>
+    </div>
+
+    <!-- Alert Banner -->
+    <div id="alertBanner" class="alert-banner hidden">
+        <div class="alert-box">
+            <p><strong>Human detected!</strong></p>
+        </div>
+    </div>
+
+    <div class="main-container" id="mainContainer">
+        <!-- Left Panel -->
+        <div class="left-panel" id="leftPanel">
+            <h1>🐾 Animal Detection AI</h1>
+            <p>Select an image to detect animals</p>
+
+            <div id="upload-container">
+                <input type="file" id="imageInput" accept="image/*" hidden />
+                <label for="imageInput" id="upload-button">📷 Upload an Image</label>
+            </div>
+
+            <button id="detectButton">🔍 Detect</button>
+            <div class="spinner hidden" id="spinner"></div>
+            <img id="outputImage" class="hidden" alt="Detected Image">
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel hidden" id="rightPanel">
+            <div id="result"></div>
+            <div id="factsBox" class="hidden">
+                <h2>🌿 Animal Facts</h2>
+                <ul id="animalFacts"></ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built for Wildlife Conservation</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

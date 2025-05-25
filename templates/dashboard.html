@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Header/Navbar -->
+    <div class="header">
+        <div>Wildlife Detection Dashboard</div>
+        <div class="user-menu">
+            <button class="user-icon" id="userIcon">👤</button>
+            <div class="dropdown hidden" id="userDropdown">
+                <a href="#">Welcome, {{ username }}</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-container">
+        <!-- Left Panel - Recent Detections -->
+        <div class="left-panel">
+
+
+            <h2>Recent Detections</h2>
+            <ul id="detectionHistory" style="list-style: none; padding: 0;"></ul>
+        </div>
+
+        <!-- Right Panel - Download Logs -->
+        <div class="right-panel">
+            <h2>Download Logs</h2>
+            <button id="downloadLogsButton" class="detectButton">Download Detection Logs</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
